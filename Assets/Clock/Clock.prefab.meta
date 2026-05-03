@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 478451c8cb35f41198ee2262f41601c5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 278070
+  packageName: Working Clock
+  packageVersion: 1.0
+  assetPath: Assets/Clock/Clock.prefab
+  uploadId: 646538
