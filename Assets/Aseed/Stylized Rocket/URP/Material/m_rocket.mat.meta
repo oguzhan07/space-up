@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 34d8e0a509343e44aa8049ff117c18c2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 367986
+  packageName: Stylized Rocket
+  packageVersion: 1.0
+  assetPath: Assets/Aseed/Stylized Rocket/URP/Material/m_rocket.mat
+  uploadId: 887876
