@@ -1,57 +1,83 @@
-# Bedroom Adventure (Unity Project)
+# Space UP
 
-This is a 3D game made with Unity. In the game, you play a small character in a big bedroom. You explore the room, look at objects, and try to survive with your energy (sanity) bar.
+**Akdeniz Game Jam 2026**'da 3 kişilik ekiple 48 saatte yapılan 3B oyun.
 
-## About the Game
+Büyük bir yatak odasında küçük bir karakteri yönetiyorsun. Odayı geziyor, nesnelerle etkileşime
+giriyor ve enerjin (sanity) tükenmeden hayatta kalmaya çalışıyorsun.
 
-The game starts with a main menu. When you press the **Play** button, the camera moves in a smooth arc, the screen fades to black, and the game scene loads.
+<!-- Buraya oynanış GIF'i ve ekran görüntüleri ekle:
+![Oynanış](docs/gameplay.gif)
+-->
 
-In the game, you can change between two forms of the character:
+## Oyunun çekirdek mekaniği: enerji ve biçim değiştirme
 
-- **Mini character**: small and uses less energy.
-- **Big character**: strong but uses more energy.
+Oyunun tamamı tek bir gerilim üzerine kurulu: **enerjin sürekli azalıyor ve onu durduramıyorsun.**
 
-Press the **F** key to switch between the two forms. Switching costs a little energy, and you must wait a short time before you can switch again.
+İki karakter biçimi arasında geçiş yapabiliyorsun:
 
-Your energy goes down over time. When the energy bar gets low, the screen slowly becomes dark. If your energy reaches zero, the game is over and the "Game Over" scene loads.
+| Biçim | Özellik | Enerji tüketimi |
+|---|---|---|
+| **Mini** | Küçük, dar yerlere girer | Yavaş |
+| **Büyük** | Güçlü, yüksek yerlere erişir | Hızlı |
 
-## Controls
+**F** tuşuyla geçiş yapılıyor ama geçişin kendisi de anlık enerji harcıyor ve bir bekleme süresi
+var. Yani "büyük biçimde kal, güçlü ol" diye bir strateji mümkün değil — oyuncu sürekli
+"şimdi hangi biçime ihtiyacım var?" diye karar vermek zorunda. Tasarımın amacı buydu.
 
-| Key / Input | Action |
+Enerji belirli bir eşiğin altına düştüğünde **ekran yavaş yavaş kararmaya başlıyor**. Bu sadece
+görsel bir efekt değil, oyuncuya kalan süreyi arayüze bakmadan hissettiren bir uyarı. Enerji
+sıfırlanınca oyun bitiyor ve Game Over sahnesi yükleniyor.
+
+Kararmanın başlangıç eşiği, en koyu değeri, biçim başına tüketim hızı, geçiş maliyeti ve bekleme
+süresi — hepsi Inspector'dan ayarlanabilir alanlar olarak dışarı çıkarıldı. Jam sırasında oyunun
+dengesini kod değiştirmeden ayarlayabilmek için böyle yapıldı.
+
+## Diğer sistemler
+
+**Menü ve sahne geçişi** — Play'e basıldığında kamera yumuşak bir yay çizerek hareket ediyor,
+ekran kararıyor ve oyun sahnesi yükleniyor. Menüden oyuna geçiş kesme değil, tek bir akış.
+
+**Nesne etkileşimi** — Odadaki kitaplara yaklaşınca nesne parlayıp dönmeye başlıyor; **E** ile
+sayfa arayüzü açılıyor. Etkileşim mesafesi ve arka arkaya basmayı engelleyen bekleme süresi
+ayarlanabilir.
+
+**Ses** — Ayrı müzik ve efekt yöneticileri, oyuncuya ait sesler için ayrı bir yönetici.
+
+## Kod yapısı
+
+Bize ait kod `Assets/a Scripts` ve `Assets/Scripts` klasörlerinde:
+
+| Script | Ne yapar |
 |---|---|
-| Mouse | Look around |
-| W, A, S, D | Move |
-| F | Switch character (mini / big) |
+| `SanityManager.cs` | Enerji barı, ekran kararması, biçim değiştirme, oyun sonu |
+| `CharacterSwitch.cs` | İki karakter arasında geçiş, Cinemachine kamerasının hedefini devretme |
+| `CameraArcMovement.cs` | Menüdeki yay hareketi ve fade ile sahne geçişi |
+| `MouseLook.cs` | Fareyle etrafa bakma |
+| `GroundDetector.cs` | Karakter yerde mi kontrolü |
+| `BookInteraction.cs` | Kitap etkileşimi ve sayfa arayüzü |
+| `MenuManager.cs` | Menü butonları |
+| `MusicManager.cs`, `SoundManager.cs`, `PlayerSoundManager.cs` | Ses yönetimi |
 
-## Main Scripts
+## Kontroller
 
-The main game code is in `Assets/a Scripts` and `Assets/Scripts`:
+| Tuş | Hareket |
+|---|---|
+| W A S D | Hareket |
+| Fare | Etrafa bakma |
+| F | Biçim değiştir (mini / büyük) |
+| E | Etkileşim |
 
-- `SanityManager.cs` – controls the energy bar, the dark screen effect, character switching, and the game-over state.
-- `MouseLook.cs` – lets the player look around with the mouse.
-- `CameraArcMovement.cs` – moves the camera at the start of the game and changes the scene with a fade effect.
-- `MenuManager.cs` – controls the Play and Quit buttons in the menu.
-- `GroundDetector.cs` – checks if the player is on the ground.
-- `PlayerSoundManager.cs`, `MusicManager.cs`, `SoundManager.cs` – play sounds and music.
-- `BookInteraction.cs` – lets the player interact with books.
-- `CharacterSwitch.cs` – helps with changing the character form.
+## Kullanılan teknolojiler
 
-## Scenes
+Unity 6 (6000.4.3f1) · C# · URP · Cinemachine
 
-Important scenes are in `Assets/Scenes`:
+## Görseller ve modeller
 
-- `BedRoom.unity` – the main game scene (the bedroom).
-- `SampleScene.unity` – a test scene.
-- `mekanik.unity` – a scene for testing game mechanics.
+Projedeki 3B modeller, karakterler ve animasyonlar ücretsiz hazır asset paketlerinden geliyor
+(KidsCharacterFree, DavidJalbert LowPolyPeople, ithappy Animals_FREE ve diğerleri) ve kendi
+lisansları altında kullanılıyor. **Oyunun kodu ekibimize ait.**
 
-## How to Open the Project
+## Jam notu
 
-1. Install **Unity 6000.4.3f1** (Unity 6) or a newer version.
-2. Open **Unity Hub** and click **Add**.
-3. Choose this project folder.
-4. Open the project and wait for Unity to import the files.
-5. Open the scene `Assets/Scenes/BedRoom.unity` and press **Play**.
-
-## Assets
-
-The project uses free low-poly asset packs, for example: furniture models, kids' toys, a playground set, and character models. These assets are in the `Assets` folder.
+48 saatte yazıldı. Kod jam temposunu yansıtıyor — klasör isimleri ve bazı yapılar aceleyle
+kurulmuş durumda. Oyunun tasarım fikri ve çalışan mekaniği asıl çıktı.
